@@ -1,5 +1,5 @@
 [package]
-name = "base62"
+name = "base-62"
 version = "0.1.0"
 authors = ["Alex Grinman <alex@krypt.co>"]
 edition = "2018"
