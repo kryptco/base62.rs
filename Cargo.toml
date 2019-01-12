@@ -5,6 +5,7 @@ authors = ["Alex Grinman <alex@krypt.co>"]
 edition = "2018"
 description="encode to/from bytes to base62 string"
 keywords=["base62", "encode", "decode"]
+license = "MIT"
 
 [dependencies]
 failure = "0.1.5"
