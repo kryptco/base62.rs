@@ -6,6 +6,9 @@ edition = "2018"
 description="encode to/from bytes to base62 string"
 keywords=["base62", "encode", "decode"]
 license = "MIT"
+homepage = "https://github.com/kryptco/base62.rs"
+repository = "https://github.com/kryptco/base62.rs"
+readme = "README.md"
 
 [dependencies]
 failure = "0.1.5"
