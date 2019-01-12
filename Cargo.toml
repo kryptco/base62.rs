@@ -1,0 +1,11 @@
+[package]
+name = "base62"
+version = "0.1.0"
+authors = ["Alex Grinman <alex@krypt.co>"]
+edition = "2018"
+
+[dependencies]
+failure = "0.1.5"
+num-bigint = "0.2.2"
+num-traits = "0.2.6"
+num-integer = "0.1.39"
