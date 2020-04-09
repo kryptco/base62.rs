@@ -6,7 +6,6 @@
 use num_bigint::{BigUint};
 use num_traits::{Zero, One, ToPrimitive};
 use num_integer::Integer;
-use failure::Fail;
 
 /// Convert a byte buffer into a Base62 String
 pub fn encode(bytes: &[u8]) -> String {
@@ -43,11 +42,21 @@ pub fn decode(input: &str) -> Result<Vec<u8>, Error> {
     Ok(val.to_bytes_be()[1..].to_vec())
 }
 
-#[derive(Debug, Fail)]
+#[derive(Debug)]
 pub enum Error {
-    #[fail(display = "Invalid character '{}'", character)]
     BadCharacter { character: char}
 }
+
+impl std::fmt::Display  for Error {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Error::BadCharacter{character} => {
+                f.write_str(&format!("Invalid character, '{}'", character))
+            }
+        }
+    }
+}
+impl std::error::Error for Error {}
 
 // Alphabet Mapping
 const BASE: usize = 62;
@@ -64,9 +73,9 @@ const ALPHABET: [char; BASE] = [
 /// Reverse map a char to its "remainder" (its index in `ALPHABET`)
 fn char_to_remainder(c: char) -> Result<u64, Error> {
     let i = match c {
-        '0'...'9' => ((c as u64) % ('0' as u64)),
-        'A'...'Z' => ((c as u64) % ('A' as u64)) + 10,
-        'a'...'z' => ((c as u64) % ('a' as u64)) + 36,
+        '0'..='9' => ((c as u64) % ('0' as u64)),
+        'A'..='Z' => ((c as u64) % ('A' as u64)) + 10,
+        'a'..='z' => ((c as u64) % ('a' as u64)) + 36,
         _ => return Err(Error::BadCharacter { character: c })
     };
 
